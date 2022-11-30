@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<style>
+			*{
+				padding:0;
+				margin:0;
+			}
+			body{
+				background:f8f8f8;
+			}
+			nav{
+				background: #000;
+			}
+			nav li{
+				list-style: none;
+				display: inline-block;
+				width:177px;
+				color:#fff;
+				line-height: 48px;
+				text-align:center;
+				cursor:pointer;
+			}
+			.s{
+				background: #2e7d32;
+			}
+			div p{
+			    padding:48px 0;
+				text-align: center;
+				font-size: 48px;
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="width:720px;margin:100px auto">
+			<nav>
+				<li onclick="show(0)">1</li>
+				<li onclick="show(1)">2</li>
+				<li onclick="show(2)">3</li>
+				<li onclick="show(3)">4</li>
+			</nav>
+			<div style="border: 1px #000 solid;">
+				<p>p 1</p>
+				<p>p 2</p>
+				<p>p 3</p>
+				<p>p 4</p>
+			</div>
+		</div>
+		<script src="jquery.min.js"></script>
+		<script>
+			function show(i){
+				$("div p").each(function(){
+					$(this).hide();
+				});
+				$("nav li").each(function(){
+					$(this).removeClass("s");
+				});
+				$("div p:eq("+i+")").show();
+				$("nav li:eq("+i+")").addClass("s");
+			}
+			show(0);
+		</script>
+	</body>
+<html>

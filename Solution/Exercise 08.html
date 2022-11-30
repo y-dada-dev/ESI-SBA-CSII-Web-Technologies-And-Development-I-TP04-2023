@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <meta charset="UTF-8">
+         <title></title>
+         <script src="jquery-3.6.1.js"></script>
+    </head>
+    <body>
+        <body>
+            <h1>Grand titre</h1>
+            <p id="premier">Premier paragraphe original.</p>
+            <ul>
+                <li class="first">item1</li>
+                <li class="second">item2</li>
+                <li class="third">item3</li>
+            </ul>
+           <a href="ex3jq.html">La solution d'ex suivant</a>
+            </body>
+
+            
+    </body>
+    <script  type="text/javascript">
+        var b = document.body;
+        var h = document.getElementsByTagName('h1');
+        var l=document.getElementById('second')
+        let htmlContent = '<a href="ex2tp4_jq.html">La solution du Exercice2</a><br>';
+        let htmlCont2= '<button onclick="sampleFunction()">Valider</button>'
+        $(document).ready(function(){
+            $(h).prepend(htmlContent);
+            $('p').append(htmlCont2);
+            $("<li>Element Insérer</li>").insertBefore('.second');
+            $('.third').replaceWith('<li>Element remplacer</li>')
+            // $('ul').append('<li>Element Insérer</li>');
+            // $('.first').remove();
+
+
+        })
+        
+        
+
+    </script>
+</html> 

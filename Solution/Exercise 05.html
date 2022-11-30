@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<style>
+			*{
+				padding:0;
+				margin:0;
+			}
+			header{
+				height:60px;
+				line-height:60px;
+				padding:0 16px;
+				background-color:#001940;
+				color:#fff
+			}
+			#btn{
+				display:block;
+				margin-top:30px;
+				padding:8 24px;
+				color:#fff;
+				background-color:#1e88e5;
+				border:none;
+				border-radius:16px;
+			}
+			#mL p{
+			    height: 48px;
+				line-height: 48px;
+				background-color: #e0e0e0;
+				padding: 0 16px;
+				margin-top:16px;
+			}
+			#mL p .time{
+				float:right;
+			}
+			#mL p input{
+			    margin-top: 16px;
+				height: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>Contact</header>
+		<div style="padding:24px">
+			<h2><b>votre message</b></h2>
+			<textarea id="msg" style="    width: 100%;height: 96px;margin-top: 16px;"></textarea>
+			<button id="btn">Envoyer</button>
+			<div id="mL"></div>
+		</div>
+		
+		
+		<script>
+			btn = document.getElementById("btn");
+			id = 0;
+			mL = [];
+			btn.addEventListener("click",function(){
+				if(document.getElementById("msg").value!=""){
+					msg = document.createTextNode(document.getElementById("msg").value);
+					m = document.createElement("m");
+					m.appendChild(msg);
+					m.setAttribute("class","m");
+					
+					time = document.createTextNode("il y a 0 seconds");
+					span = document.createElement("span");
+					span.appendChild(time);
+					span.setAttribute("class","time");
+					
+					input = document.createElement("input");
+					input.setAttribute("value",document.getElementById("msg").value);
+					input.setAttribute("class","input");
+					input.setAttribute("type","hidden");
+					
+					let p = document.createElement("p");
+					p.appendChild(m);
+					p.appendChild(span);
+					p.appendChild(input);
+					p.setAttribute("id","p"+id);
+					
+					mL[id] = {"p":p,"time":0};
+					document.getElementById("mL").prepend(mL[id].p);
+					
+					//click
+					p.addEventListener("dblclick",function(){
+						p.getElementsByClassName("input")[0].setAttribute("type","text");
+						p.getElementsByClassName("m")[0].style.display="none";
+						document.querySelector("#"+p.id+" .input").focus();
+					});
+					document.querySelector("#"+p.id+" .input").addEventListener("focusout",function(){
+						document.querySelector("#"+p.id+" .m").innerText=document.querySelector("#"+p.id+" .input").value;
+						p.getElementsByClassName("input")[0].setAttribute("type","hidden");
+						p.getElementsByClassName("m")[0].style.display="inline";
+					});
+					
+					id++;
+					document.getElementById("msg").value="";
+				}
+			});
+			setInterval(function(){
+				for(let m of mL){
+					m.time += 1;
+					date = new Date(null);
+					date.setSeconds(m.time);
+					s = "il y a ";
+					if(date.getHours()>0) s += date.getHours()+" Hours, ";
+					if(date.getMinutes()>0 || date.getHours()>0) s += date.getMinutes()+" Minutes, ";
+					s += date.getSeconds()+" Seconds";
+					//m.p.getElementsByClassName("time").innerText=s;
+					document.querySelector("#"+m.p.id+" .time").innerText=s;
+				}
+			},1000)
+		</script>
+	</body>
+</html>

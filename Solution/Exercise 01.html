@@ -1,0 +1,24 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<h1>Grand titre</h1>
+		<p id="premier">Premier paragraphe original.</p>
+		<ul>
+			<li>item1</li>
+			<li>item2</li>
+			<li>item3</li>
+		</ul>
+		<script src="jquery.min.js"></script>
+		<script>
+			$("h1").prepend("<a href='#'>link</a> ");
+			$("p").append("<button>button</button> ");
+			$("ul li:first").after("<li>item_insere</li> ");
+			
+			$("ul li:eq(2)").text("2");
+			$("ul li:eq(3)").html("3");
+			
+			$("ul li:first").remove();
+		</script>
+	</body>
+</html>

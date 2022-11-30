@@ -1,0 +1,185 @@
+<html>
+	<head>
+		<style>
+			body{
+				background-color: #eee;
+			}
+			form{
+				width: fit-content;
+				padding: 12px 48px;
+				margin: 124px auto;
+				background-color: #e0e0e0;
+				border-radius: 8px;
+			}
+			#page{
+				width: fit-content;
+				padding:12px 24px;
+				background-color: #fff;
+				border-radius: 16px;
+			}
+			#nav div{
+				display: inline-block;
+				width: 44%;
+				margin: 0 2%;
+				text-align: center
+			}
+			#nav span{
+				background-color: #eee;
+				display: inline-block;
+				padding: 0 4px;
+				text-align: center;
+				border: 2px #000 solid;
+			}
+			
+			.s span{
+				background: #000!important;
+				color: #fff;
+			}
+			#nav p{
+				margin-top:2px
+			}
+			h3{
+				text-align: center;
+			}
+			label{
+				width: 200px;
+				display: inline-block;
+			}
+			form div{
+				margin-top:16px;
+			}
+			.btn{
+				width: fit-content;
+				margin: 0 auto;
+				margin-top:24px
+			}
+			#bs,#bp{
+			    padding: 8px 32px;
+				background-color: #2196f3;
+				color: #fff;
+				border: none;
+				border-radius: 8px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<form>
+			<div id="nav">
+				<div id="i1" class="s">
+					<span>1</span>
+					<p>Page 1</p>
+				</div>
+				<div id="i2">
+					<span>2</span>
+					<p>Page 2</p>
+				</div>
+			</div>
+			<div id="page">
+				<div id="page1">
+					<h3>Page 1</h3>
+					<div>
+						<label>Etat civil</label>
+						<select  value="" id="etat">
+							<option value="" selected></option>
+							<option value="Mr">Mr</option>
+							<option value="Mme">Mme</option>
+						</select>
+					</div>
+					<div>
+						<label>Nom</label>
+						<input type="text" id="fName"/>
+					</div>
+					<div>
+						<label>Prenom</label>
+						<input type="text" id="lName"/>
+					</div>
+					<div>
+						<label>Nom complete</label>
+						<input type="text" id="fullName" readonly ></input>
+					</div>
+					<div class="btn">
+						<button type="button" id="bs">Suivant</button>
+					</div>
+				</div>
+				
+				<div id="page2" style="display:none">
+					<h3>Page 2</h3>
+					<div>
+						<label>Nivea en java script</label>
+						<input type="range" id="nv" value="50"/>
+						<span id="span">50</span>
+					</div>
+					<div>
+						<label>Mot de passe</label>
+						<input type="password" id="p1"/>
+					</div>
+					<div>
+						<label>Confirmation Mot de passe</label>
+						<input type="password" id="p2"/>
+					</div>
+					<div class="btn">
+						<button type="button" id="bp">Precendent</button>
+						<button id="be" disabled>Envoyer</button>
+					</div>
+			</div>
+			</div>
+		</form>
+		<script src="jquery.min.js"></script>
+		<script>
+			function up(){
+				$("#fullName").val($("#etat").val()+" "+$("#fName").val()+" "+$("#lName").val());
+			}
+			function check(){
+				i = 0;
+				$("input").each(function(){
+					if($(this).val()==""){
+						i++;
+						return false;
+					}
+				})
+				if($("#etat").val()==""){ i++;}
+				if($("#p1").val()!=$("#p2").val()){
+					i++;
+				}	
+				if(i==0)
+					$("#be").prop("disabled",false);
+				else
+					$("#be").prop("disabled",true);
+			}
+			$(document).ready(function(){
+				$("#etat").on("input",function(){
+					up();
+					check();
+				});
+				$("#fName").on("input",function(){
+					up();
+				});
+				$("#lName").on("input",function(){
+					up();
+				});
+				$("input").on("input",function(){
+					check();
+				});
+				$("#nv").on("input",function(){
+					$("#span").html($("#nv").val());
+				});
+				//--------
+				$("#bs").on("click",function(){
+					$("#page2").slideToggle();
+					$("#page1").slideToggle();
+					$("#i1").toggleClass("s");
+					$("#i2").toggleClass("s");
+				});
+				
+				$("#bp").on("click",function(){
+					$("#page1").slideToggle();
+					$("#page2").slideToggle();
+					$("#i1").toggleClass("s");
+					$("#i2").toggleClass("s");
+				});
+			});
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <meta charset="UTF-8">
+         <title></title>
+         <script src="jquery-3.6.1.js"></script>
+    </head>
+    <body><div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-set">
+              <form class="form-1">
+                <div class="form-group">
+                 <label class="recuperer" for="etat">état civile<span aria-hidden="true" passwordstyle="color: red">*</span></label>
+                 <select class="recuperer" name="etat" id="etat" required>
+                   <optgroup label="Situation">
+                    <option value="Mr">Mr.</option>
+                    <option value="Mme">Mme.</option>
+                    <option value="Melle">Melle.</option>
+                   </optgroup>
+                 </select><br><br>
+                </div>
+                <div class="form-group">
+                 <label for="login">Nom:<span aria-hidden="true" passwordstyle="color: red">*</span></label>
+                 <input  class="recuperer" type="text" id="nom" name="nom" placeholder="Votre nom" required><br><br>
+                </div>
+                 <div class="form-group">
+                 <label for="login">Prenom:<span aria-hidden="true" passwordstyle="color: red">*</span></label>
+                 <input  class="recuperer" type="text" id="prenom" name="prenom" placeholder="Votre prenom" required><br><br>
+                </div>
+                <div class="form-group">
+                 <label for="login" type="read">Nom Complet:<span aria-hidden="true" passwordstyle="color: red"></span></label>
+                 <input type="text" id="Complet" name="Complet"><br><br>
+                </div>
+                <div class="form-group">
+                 <label class="niv" for="password">Mot de Passe:<span aria-hidden="true" passwordstyle="color: red">*</span></label>
+                 <input type="password" id="password" name="password" placeholder="mot de passe" required maxlength="6" minlength="4"><br><br>
+                 </div>
+                 <div class="form-group">
+                 <label for="confirm_password">Confirmez Votre Mot de Passe:<span aria-hidden="true" passwordstyle="color: red">*</span></label>
+                 <input type="password" id="confirm_password" name="confirm_password" required maxlength="6" minlength="4"><br><br>
+                 </div>
+                 
+               </fieldset>
+
+               <input type="reset" id="configreset" value="Réinitialiser">
+            
+               <button type="submit" class="btn btn-primary next" id="register">Next Step</button>
+               
+              </form>
+              <form class="form-2" style="display:none">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    
+                  </div>
+                  <input type="submit"  id="register" value="Envoyer" disabled="disabled"  class="btn btn-secondary btn-sm rounded-0" />
+            </form>
+            </div>
+          </div>
+        </div>
+        </div>
+            </body>
+
+
+    <style>
+.form-1,.form-2{
+    animation: moveInRight .5s ease-out;
+  
+
+}
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px)
+    }
+
+    80% {
+        transform: translateX(-10px)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0px)
+    }
+}
+    </style>
+            
+    <script  type="text/javascript">
+        var b = document.body;
+        $( function(){
+             var credits = 50,
+             jObjInput = $( "<input/>", {
+                "type" : "range",
+                 "min" : "0",
+                 "max" : "100",
+                 "value" : credits,
+                "name" : "discount_credits",
+                "mousemove" : function(){
+                 $( this ).next().text( $(this).val() );
+         }
+            });
+
+ $( "<li/>", {
+     "html" : '<label>Niveau en JavaScript : </label>'
+ }).append( jObjInput ).append( '<span>' + credits + '</span><br> <br>' ).insertBefore('.niv');
+
+});
+
+$(function() {
+  $('#confirm_password').each(function(index, element) {
+    $(element).keyup(function() {
+      if ($(this).val() == '') {
+        $('#register').prop('disabled', true); //disable 
+      } else {
+        $('#register').prop('disabled', false); //enable
+      }
+    });
+  })
+});
+
+$('configreset').trigger("reset");
+   
+$('.recuperer').change(function() {
+      $('#Complet').val( $('#etat').val() +' '+$('#nom').val() +' '+ $('#prenom').val());});
+
+      $(document).ready(function() {
+  $(".form-set form:not(:first-child)").each(function(e) {
+    if (e != 0)
+      $(this).hide();
+  });
+
+  $(".next").click(function() {
+    if ($(".form-set form:visible").next().length != 0)
+      $(".form-set form:visible").next().show().prev().hide();
+    else {
+      $(".form-set form:visible").hide();
+      $(".form-set form:first").show();
+    }
+    return false;
+  });
+});
+
+    </script>
+</html> 
