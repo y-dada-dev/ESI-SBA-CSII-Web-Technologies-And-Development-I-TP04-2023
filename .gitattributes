@@ -3,3 +3,7 @@
 
 *.min.js linguist-detectable=true
 *.min.js linguist-language=JavaScript
+
+
+*.6.1.js linguist-detectable=true
+*.6.1.js linguist-language=JavaScript
